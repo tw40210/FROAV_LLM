@@ -26,7 +26,6 @@ def get_db_connection() -> psycopg.Connection:
         st.stop()
 
     dsn = f"host={host} port={port} dbname={dbname} user={user} password={password}"
-    print(dsn)
     return psycopg.connect(dsn, autocommit=True)
 
 

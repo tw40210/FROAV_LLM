@@ -102,17 +102,27 @@ def render_feedback_form(row: Dict[str, Any]) -> None:
                 "📝 You have already submitted feedback for this report. You can edit it below."
             )
             existing_data = existing_feedback.get("human_feedback_data", {})
+
             if isinstance(existing_data, dict):
-                default_rating = existing_data.get("rating", 4)
+                default_relevance_score = existing_data.get("relevance_score", 50)
+                default_completeness_score = existing_data.get("completeness_score", 50)
+                default_reliability_score = existing_data.get("reliability_score", 50)
+                default_understandability_score = existing_data.get("understandability_score", 50)
                 default_comments = existing_data.get("comments", "")
             else:
-                default_rating = 4
+                default_relevance_score = 50
+                default_completeness_score = 50
+                default_reliability_score = 50
+                default_understandability_score = 50
                 default_comments = ""
 
             if existing_feedback.get("logged_at"):
                 st.caption(f"Last updated: {existing_feedback['logged_at']}")
         else:
-            default_rating = 4
+            default_relevance_score = 50
+            default_completeness_score = 50
+            default_reliability_score = 50
+            default_understandability_score = 50
             default_comments = ""
             st.write("Let us know how useful this report was.")
 
@@ -124,28 +134,28 @@ def render_feedback_form(row: Dict[str, Any]) -> None:
                 "Relevance Score (1 = low, 100 = high)",
                 min_value=1,
                 max_value=100,
-                value=default_rating,
+                value=default_relevance_score,
             )
 
             completeness_score = st.slider(
                 "Completence Score (1 = low, 100 = high)",
                 min_value=1,
                 max_value=100,
-                value=default_rating,
+                value=default_completeness_score,
             )
 
             reliability_score = st.slider(
                 "Reliability Score (1 = low, 100 = high)",
                 min_value=1,
                 max_value=100,
-                value=default_rating,
+                value=default_reliability_score,
             )
 
             understandability_score = st.slider(
                 "Understandability Score (1 = low, 100 = high)",
                 min_value=1,
                 max_value=100,
-                value=default_rating,
+                value=default_understandability_score,
             )
             comments = st.text_area(
                 "Feedback",
