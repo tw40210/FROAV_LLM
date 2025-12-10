@@ -1,0 +1,35 @@
+[project]
+name = "FROAV_LLM"
+version = "0.1.0"
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]",
+  "pydantic",
+  "pandas",
+  "numpy",
+  "openai>=1.0.0",
+  "httpx",
+  "pypdf2",
+  "pdfplumber",
+  "pymupdf",
+  "beautifulsoup4",
+  "python-multipart",
+  "aiofiles",
+  "python-dotenv",
+  "pytest-asyncio>=1.2.0",
+  "pytest-cov>=7.0.0",
+  "pre-commit>=4.3.0",
+  "black",
+  "flake8",
+  "isort",
+  "pyupgrade>=3.20.0",
+  "psycopg[binary]>=3.2.10",
+  "streamlit>=1.28.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "pytest-asyncio",
+
+]

@@ -1,0 +1,15 @@
+.vscode/
+.venv/
+FROAV_LLM.egg-info/
+.cursorrules
+
+**/__pycache__/
+data/
+build/
+static/
+
+# Environment variables
+.env
+src/config/.env
+*.env
+!.env.example
