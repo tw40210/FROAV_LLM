@@ -66,6 +66,13 @@ services:
       context: .
       dockerfile: LLMJudges_frontend/Dockerfile
     restart: always
+    volumes:
+      # Mount config directory for .env file
+      - ./LLMJudges_frontend/src/config:/app/LLMJudges_frontend/src/config
+      # Mount data directory for PDFs in server
+      - ./LLMJudges_server/data:/app/LLMJudges_frontend/data
+      # ADD THIS: Mount source code for hot-reload during development
+      - ./LLMJudges_frontend/src:/app/LLMJudges_frontend/src
     ports:
       - "8501:8501"
     depends_on:

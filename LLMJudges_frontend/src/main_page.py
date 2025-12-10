@@ -12,7 +12,7 @@ from LLMJudges_frontend.src.utils import (
 def main() -> None:
     # Intentionally not calling st.set_page_config here to avoid conflicts
     # with internal pages that may set it themselves (e.g., report_tab.main).
-    st.title("FROAV_LLM Dashboard")
+    st.title("FROAV_LLM DashboardSS")
 
     # Sidebar login/logout section
     st.sidebar.header("Authentication")

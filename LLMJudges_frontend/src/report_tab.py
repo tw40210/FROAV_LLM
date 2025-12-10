@@ -262,9 +262,9 @@ def display_execution_data(execution_data: Dict[str, Any], execution_id: int) ->
 
     # Display all collected observations
     if collected_observations:
-        with st.expander("**Collected Observations(Reference sources from SEC filings):**"):
+        with st.expander("**Collected Observations(Reference sources from RAF Documents):**"):
 
-            st.subheader("📋 All Collected Observations(Reference sources from SEC filings)")
+            st.subheader("📋 All Collected Observations(Reference sources from RAF Documents)")
             st.write(f"**Total observations collected:** {len(collected_observations)}")
             collected_observations.sort(key=lambda x: (x["filename"], x["page_index"]))
 
@@ -330,7 +330,7 @@ def display_execution_data(execution_data: Dict[str, Any], execution_id: int) ->
                 # Create a download button for each file
                 # Note: This assumes files are stored in a specific directory structure
                 # You may need to adjust the file path based on your actual file storage
-                base_dir = os.getcwd() + "/LLMJudges_server/"
+                base_dir = os.getcwd() + "/LLMJudges_frontend/"
                 company_ticker = filename.split("_")[0]
                 file_path = os.path.join(base_dir, "data", "company_data", company_ticker, filename)
                 # Check if file exists (you might want to implement actual file checking)
