@@ -4,7 +4,6 @@ FROAV_LLM.egg-info/
 .cursorrules
 
 **/__pycache__/
-data/
 build/
 static/
 
