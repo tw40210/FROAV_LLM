@@ -1,26 +1,32 @@
-We use docker compose to manage n8n and postgres and keep python cli and streamlit local for easy debugging.
 
-* Rebuild:
-docker compose up -d --no-deps --build
-
-
-* Installation:
-1. uv
-2. .env
-3. import workflow.json (Docs: backup n8n)
-4. postgres: credential, create tables
-
-
-* TODO:
-1. SEC summary reports
-2. survey system
-3. database for survey
+## Prerequisite
+- Docker
+- Docker compose
 
 
 
-* Create the new table with your updated schema
-```bash
-CREATE TABLE n8n_report_model_logs (
+## Installation
+================================================================================
+
+1. Setup `LLMJudges_server/src/config/.env` and `LLMJudges_frontend/src/config/.env` 
+```
+#As you have in docker-compose.yml
+PGPASSWORD=mysecretpassword 
+PGHOST=postgres 
+PGHOST_CLUSTER=postgres
+PGPORT=5432 
+PGDATABASE=n8n 
+PGUSER=n8n 
+```
+
+2. `docker compose up`
+3. `docker cp ./workflows.json froav_llm-n8n-1:/home/node/.n8n/workflows.json`
+4. `docker exec -it froav_llm-n8n-1 n8n import:workflow --input=/home/node/.n8n/workflows.json`
+5. `python -m streamlit run LLMJudges_server/src/LLMJudges_frontend/main_page.py --server.port 8501`
+
+6. Create postgres tables (run commands in local terminal)
+```
+echo "CREATE TABLE n8n_report_model_logs (
     id SERIAL PRIMARY KEY,
     n8n_execution_id VARCHAR(255) UNIQUE NOT NULL,
     workflow_id VARCHAR(255),
@@ -30,11 +36,12 @@ CREATE TABLE n8n_report_model_logs (
     query TEXT,
     company_ticker VARCHAR(50),
     report_groups TEXT
-);
+);" | docker exec -i froav_llm-postgres-1 psql -U n8n -d n8n
 ```
 
-```bash
-CREATE TABLE n8n_llm_judgement_logs (
+
+```
+echo "CREATE TABLE n8n_llm_judgement_logs (
     id integer,
     judge_n8n_execution_id VARCHAR(255) UNIQUE NOT NULL,
     report_n8n_execution_id VARCHAR(255) NOT NULL,
@@ -44,11 +51,12 @@ CREATE TABLE n8n_llm_judgement_logs (
     logged_at TIMESTAMPTZ DEFAULT NOW(),
     query TEXT,
     company_ticker VARCHAR(50)
-);
+);" | docker exec -i froav_llm-postgres-1 psql -U n8n -d n8n
 ```
 
-```bash
-CREATE TABLE report_human_feedback (
+
+```
+echo "CREATE TABLE report_human_feedback (
     id SERIAL PRIMARY KEY,
     user_name VARCHAR(255) NOT NULL,
     report_n8n_execution_id VARCHAR(255) NOT NULL,
@@ -56,11 +64,12 @@ CREATE TABLE report_human_feedback (
     logged_at TIMESTAMPTZ DEFAULT NOW(),
     query TEXT,
     company_ticker VARCHAR(50)
-);
+);" | docker exec -i froav_llm-postgres-1 psql -U n8n -d n8n
 ```
 
-```bash
-CREATE TABLE user_data (
+
+```
+echo "CREATE TABLE user_data (
     id SERIAL PRIMARY KEY,
     user_name VARCHAR(255) UNIQUE NOT NULL,
     user_token VARCHAR(255) NOT NULL,
@@ -68,6 +77,39 @@ CREATE TABLE user_data (
     description TEXT, 
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
-);
+);" | docker exec -i froav_llm-postgres-1 psql -U n8n -d n8n
 ```
 
+7. N8n Credentials
+```
+# Postgres Node
+Host: postgres
+Database: n8n
+User: n8n
+Password: {your_postgres_password_docker_compose}
+SSL: Disable
+Port: 5432
+```
+
+* OpenRouter
+https://youtu.be/rQ039ga-Zsc?si=jz_eYiupcPRA3MYo&t=310
+* Openai (for RAG embedding)
+https://www.youtube.com/watch?v=9uJS6kvfNDE
+* Supabase (RAG)
+https://www.youtube.com/watch?v=H7Lad7tVFUI
+* Setup RAG table
+https://docs.langchain.com/oss/javascript/integrations/vectorstores/supabase
+* Troubleshooting:
+If you get a credential error after updating, try clicking the nodes, re-selecting the model and saving workflow again.
+
+
+Launch
+================================================================================
+
+1. Prepare financial filings in `LLMJudges_server/data/company_data/{company_ticker}`
+File name should be `{company_ticker}_{report_type}_{years}.pdf` ex:`META_10K_2022.pdf`
+
+2. Upload RAG materials
+3. Generate agent reports
+4. Generate LLM judgements
+5. Get expert feedbacks
