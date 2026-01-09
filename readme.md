@@ -22,9 +22,8 @@ PGUSER=n8n
 2. `docker compose up`
 3. `docker cp ./workflows.json froav_llm-n8n-1:/home/node/.n8n/workflows.json`
 4. `docker exec -it froav_llm-n8n-1 n8n import:workflow --input=/home/node/.n8n/workflows.json`
-5. `python -m streamlit run LLMJudges_server/src/LLMJudges_frontend/main_page.py --server.port 8501`
 
-6. Create postgres tables (run commands in local terminal)
+5. Create postgres tables (run commands in local terminal)
 ```
 echo "CREATE TABLE n8n_report_model_logs (
     id SERIAL PRIMARY KEY,
@@ -105,6 +104,9 @@ If you get a credential error after updating, try clicking the nodes, re-selecti
 
 Launch
 ================================================================================
+n8n server url: http://localhost:5678/
+frontend url: http://localhost:8501/
+
 
 1. Prepare financial filings in `LLMJudges_server/data/company_data/{material_category}`
 File name should be `{material_category}_{material_type}_{years}.pdf` ex:`META_10K_2022.pdf`
