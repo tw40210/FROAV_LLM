@@ -115,3 +115,16 @@ File name should be `{material_category}_{material_type}_{years}.pdf` ex:`META_1
 3. Generate agent reports
 4. Generate LLM judgements
 5. Get expert feedbacks
+
+## Customization
+================================================================================
+
+### How to add a new model
+1. Add a new model node in `Template Judgment Sub-workflow (3 Models)` and link it to `Merge All Judgments` node.
+2. Add a new model name in `Financial Report Multi-LLM Judge System (OpenRouter) v2` - `Calculate Final Score & Report` node. Like
+```
+const models = [
+        'Deepseek 3.2 (Model 1)',
+        'Deepseek 3.1 (Model 2)'
+      ]
+```
