@@ -331,8 +331,8 @@ def display_execution_data(execution_data: Dict[str, Any], execution_id: int) ->
                 # Note: This assumes files are stored in a specific directory structure
                 # You may need to adjust the file path based on your actual file storage
                 base_dir = os.getcwd() + "/LLMJudges_frontend/"
-                company_ticker = filename.split("_")[0]
-                file_path = os.path.join(base_dir, "data", "company_data", company_ticker, filename)
+                material_category = filename.split("_")[0]
+                file_path = os.path.join(base_dir, "data", "material_data", material_category, filename)
                 # Check if file exists (you might want to implement actual file checking)
                 try:
                     with open(file_path, "rb") as f:
@@ -378,7 +378,7 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
             filtered_rows = [
                 row
                 for row in filtered_rows
-                if company_filter.lower() in (row.get("company_ticker") or "").lower()
+                if company_filter.lower() in (row.get("material_category") or "").lower()
             ]
 
         # Filter by user groups if user is logged in
@@ -447,7 +447,7 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
                 {
                     "ID": row.get("id"),
                     "Execution ID": row.get("n8n_execution_id"),
-                    "Company": row.get("company_ticker"),
+                    "Company": row.get("material_category"),
                     "Status": row.get("status"),
                     "Logged At": row.get("logged_at"),
                     "Query Preview": (row.get("query") or "")[:80],
@@ -458,7 +458,7 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
 
             label = (
                 f"[{row.get('status', 'Unknown')}] "
-                f"{row.get('company_ticker', 'N/A')} | Exec {row.get('n8n_execution_id') or row.get('id')}"
+                f"{row.get('material_category', 'N/A')} | Exec {row.get('n8n_execution_id') or row.get('id')}"
             )
             if row.get("query"):
                 label += f" | {row['query'][:60]}{'...' if len(row['query']) > 60 else ''}"
@@ -493,7 +493,7 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
                 st.write(f"**N8N Execution ID:** {selected_row.get('n8n_execution_id')}")
             with col2:
                 st.write(f"**Status:** {selected_row.get('status')}")
-                st.write(f"**Company:** {selected_row.get('company_ticker', 'N/A')}")
+                st.write(f"**Company:** {selected_row.get('material_category', 'N/A')}")
             with col3:
                 st.write(f"**Logged At:** {selected_row.get('logged_at')}")
                 if selected_row.get("query"):

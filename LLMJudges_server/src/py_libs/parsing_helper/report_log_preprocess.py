@@ -151,12 +151,12 @@ def build_webhook_payload(
     """Build payload expected by the N8N judge webhook.
 
     The judge endpoint expects fields similar to those used by the CLI client:
-      { "report_text": <flattened>, "company_ticker": <str> }
+      { "report_text": <flattened>, "material_category": <str> }
     """
     processed = preprocess(execution_row_or_summary)
     payload = {
         "report_text": processed.get("flat_text", ""),
-        "company_ticker": execution_row_or_summary.get("company_ticker", "Unknown Company"),
+        "material_category": execution_row_or_summary.get("material_category", "Unknown Material"),
         "query": execution_row_or_summary.get("query", ""),
         "n8n_execution_id": execution_row_or_summary.get("n8n_execution_id", ""),
     }
@@ -222,7 +222,7 @@ def get_preprocessed_by_execution_id(execution_id: Union[str, int]) -> Dict[str,
 
     Response body contains at least:
       - report_text: flattened plain text
-      - query, company_ticker, n8n_execution_id: passthrough metadata when available
+      - query, material_category, n8n_execution_id: passthrough metadata when available
     """
     row = _fetch_execution_row(execution_id)
     if row is None:
@@ -234,6 +234,6 @@ def get_preprocessed_by_execution_id(execution_id: Union[str, int]) -> Dict[str,
         "query": row.get("query", ""),
         "output_text": processed.get("output_text", ""),
         "mid_steps_text": processed.get("mid_steps_text", ""),
-        "company_ticker": row.get("company_ticker", "Unknown Company"),
+        "material_category": row.get("material_category", "Unknown Material"),
         "n8n_execution_id": row.get("n8n_execution_id", ""),
     }

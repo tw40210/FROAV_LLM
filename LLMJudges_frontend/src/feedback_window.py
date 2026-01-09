@@ -15,7 +15,7 @@ def save_report_feedback(
     report_execution_id: str,
     feedback_payload: Dict[str, Any],
     query: str | None,
-    company_ticker: str | None,
+    material_category: str | None,
     existing_feedback_id: Optional[int] = None,
 ) -> None:
     """Persist feedback into report_human_feedback table.
@@ -33,13 +33,13 @@ def save_report_feedback(
                     UPDATE report_human_feedback
                     SET human_feedback_data = %s::jsonb,
                         query = %s,
-                        company_ticker = %s,
+                        material_category = %s,
                         logged_at = NOW()
                     WHERE id = %s AND user_name = %s
                 """
                 cur.execute(
                     update_sql,
-                    (serialized_payload, query, company_ticker, existing_feedback_id, user_name),
+                    (serialized_payload, query, material_category, existing_feedback_id, user_name),
                 )
             else:
                 # Insert new feedback
@@ -49,13 +49,13 @@ def save_report_feedback(
                         report_n8n_execution_id,
                         human_feedback_data,
                         query,
-                        company_ticker
+                        material_category
                     )
                     VALUES (%s, %s, %s::jsonb, %s, %s)
                 """
                 cur.execute(
                     insert_sql,
-                    (user_name, report_execution_id, serialized_payload, query, company_ticker),
+                    (user_name, report_execution_id, serialized_payload, query, material_category),
                 )
 
 
@@ -185,7 +185,7 @@ def render_feedback_form(row: Dict[str, Any]) -> None:
                     report_execution_id,
                     feedback_payload,
                     row.get("query"),
-                    row.get("company_ticker"),
+                    row.get("material_category"),
                     existing_feedback_id=existing_feedback_id,
                 )
                 success_message = (

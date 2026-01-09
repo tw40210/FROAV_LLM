@@ -240,8 +240,8 @@ def _display_judgement_data(jdata: Dict[str, Any], index: int) -> None:
     with meta_col1:
         if "report_id" in jdata:
             st.write(f"**Report ID:** `{jdata['report_id']}`")
-        if "company_ticker" in jdata:
-            st.write(f"**Company:** {jdata['company_ticker']}")
+        if "material_category" in jdata:
+            st.write(f"**Company:** {jdata['material_category']}")
     with meta_col2:
         if "timestamp" in jdata:
             st.write(f"**Timestamp:** {jdata['timestamp']}")
@@ -272,7 +272,7 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
             filtered_rows = [
                 row
                 for row in filtered_rows
-                if company_filter.lower() in (row.get("company_ticker") or "").lower()
+                if company_filter.lower() in (row.get("material_category") or "").lower()
             ]
 
         st.write(f"Showing {len(filtered_rows)} of {len(rows)} records")
@@ -291,7 +291,7 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
                     "ID": row.get("id"),
                     "Judge Exec ID": row.get("judge_n8n_execution_id"),
                     "Report Exec ID": row.get("report_n8n_execution_id"),
-                    "Company": row.get("company_ticker"),
+                    "Company": row.get("material_category"),
                     "Status": row.get("status"),
                     "Logged At": row.get("logged_at"),
                     "Query Preview": (row.get("query") or "")[:80],
@@ -300,7 +300,7 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
 
             label = (
                 f"[{row.get('status', 'Unknown')}] "
-                f"{row.get('company_ticker', 'N/A')} | JudgeExec {row.get('judge_n8n_execution_id') or row.get('id')} | "
+                f"{row.get('material_category', 'N/A')} | JudgeExec {row.get('judge_n8n_execution_id') or row.get('id')} | "
                 f"ReportExec {row.get('report_n8n_execution_id', 'Unknown')}"
             )
             if row.get("query"):
@@ -337,8 +337,8 @@ def main(limit: int, status_filter: str, company_filter: str) -> None:
                 st.write(f"**Status:** {selected_row.get('status')}")
                 st.write(f"**Logged At:** {selected_row.get('logged_at')}")
 
-            if selected_row.get("company_ticker"):
-                st.write(f"**Company:** {selected_row.get('company_ticker')}")
+            if selected_row.get("material_category"):
+                st.write(f"**Company:** {selected_row.get('material_category')}")
 
             if selected_row.get("query"):
                 st.subheader("Full Query")

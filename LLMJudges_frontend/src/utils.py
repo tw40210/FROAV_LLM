@@ -73,7 +73,7 @@ def get_existing_feedback(user_name: str, report_execution_id: str) -> Optional[
     """
     query_sql = """
         SELECT id, user_name, report_n8n_execution_id, human_feedback_data,
-               logged_at, query, company_ticker
+               logged_at, query, material_category
         FROM report_human_feedback
         WHERE user_name = %s AND report_n8n_execution_id = %s
         ORDER BY logged_at DESC

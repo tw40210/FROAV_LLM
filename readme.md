@@ -34,7 +34,7 @@ echo "CREATE TABLE n8n_report_model_logs (
     execution_data JSONB,
     logged_at TIMESTAMPTZ DEFAULT NOW(),
     query TEXT,
-    company_ticker VARCHAR(50),
+    material_category VARCHAR(50),
     report_groups TEXT
 );" | docker exec -i froav_llm-postgres-1 psql -U n8n -d n8n
 ```
@@ -50,7 +50,7 @@ echo "CREATE TABLE n8n_llm_judgement_logs (
     judgement_data JSONB,
     logged_at TIMESTAMPTZ DEFAULT NOW(),
     query TEXT,
-    company_ticker VARCHAR(50)
+    material_category VARCHAR(50)
 );" | docker exec -i froav_llm-postgres-1 psql -U n8n -d n8n
 ```
 
@@ -63,7 +63,7 @@ echo "CREATE TABLE report_human_feedback (
     human_feedback_data JSONB,
     logged_at TIMESTAMPTZ DEFAULT NOW(),
     query TEXT,
-    company_ticker VARCHAR(50)
+    material_category VARCHAR(50)
 );" | docker exec -i froav_llm-postgres-1 psql -U n8n -d n8n
 ```
 
@@ -106,8 +106,8 @@ If you get a credential error after updating, try clicking the nodes, re-selecti
 Launch
 ================================================================================
 
-1. Prepare financial filings in `LLMJudges_server/data/company_data/{company_ticker}`
-File name should be `{company_ticker}_{report_type}_{years}.pdf` ex:`META_10K_2022.pdf`
+1. Prepare financial filings in `LLMJudges_server/data/company_data/{material_category}`
+File name should be `{material_category}_{material_type}_{years}.pdf` ex:`META_10K_2022.pdf`
 
 2. Upload RAG materials
 3. Generate agent reports

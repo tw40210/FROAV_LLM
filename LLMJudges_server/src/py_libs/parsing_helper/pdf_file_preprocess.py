@@ -38,17 +38,17 @@ def _batched_chunks(
 
 def preprocess_pdf_file(
     file_path: Path,
-    company_ticker: str = "Unknown Company",
-    report_type: str = "10-K",
+    material_category: str = "Unknown Material",
+    material_type: str = "10-K",
     batch_size: int = DEFAULT_BATCH_SIZE,
 ) -> dict[str, Any]:
     """
     Preprocess a PDF file into chunks and organize them into batches.
 
     Args:
-        pdf_file_company_ticker: Name of the PDF file in the company_data folder.
-        company_ticker: Ticker symbol metadata.
-        report_type: Report type metadata (e.g., 10-K, 10-Q).
+        pdf_file_material_category: Name of the PDF file in the material_data folder.
+        material_category: Material category metadata.
+        material_type: Material type metadata (e.g., 10-K, 10-Q).
         batch_size: Max number of chunks per batch (mirrors uploader default).
 
     Returns:
@@ -57,7 +57,7 @@ def preprocess_pdf_file(
     if not file_path.exists():
         raise FileNotFoundError(f"PDF file not found: {file_path}")
 
-    logger.info("Locally preprocessing PDF for %s (%s)", company_ticker, report_type)
+    logger.info("Locally preprocessing PDF for %s (%s)", material_category, material_type)
     chunks = preprocess_pdf(file_path)
     total_chunks = len(chunks)
     total_characters = sum(chunk.get("char_count", 0) for chunk in chunks)
@@ -88,8 +88,8 @@ def preprocess_pdf_file(
         "success": True,
         "preprocessed": True,
         "file_name": file_path.name,
-        "company_ticker": company_ticker,
-        "report_type": report_type,
+        "material_category": material_category,
+        "material_type": material_type,
         "total_chunks": total_chunks,
         "total_batches": total_batches,
         "batch_size": batch_size,

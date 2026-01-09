@@ -24,7 +24,7 @@ logger = logging.getLogger(__name__)
 
 # N8N configuration - use environment variable or default to Docker service name
 N8N_BASE_URL = os.getenv("N8N_BASE_URL", "http://n8n:5678")
-BASE_PDF_PATH = "LLMJudges_server/data/company_data"
+BASE_PDF_PATH = "LLMJudges_server/data/material_data"
 
 router = APIRouter(prefix="/llm-judges", tags=["LLM Judges"])
 
@@ -38,9 +38,9 @@ class ExecutionIdRequest(BaseModel):
 
 
 class PDFPreprocessRequest(BaseModel):
-    pdf_file_company_ticker: list[str] = Field(..., description="List of company tickers")
-    report_type: list[str] = Field(
-        ..., description="List of financial report types (10-K, 10-Q, etc.)"
+    pdf_file_material_category: list[str] = Field(..., description="List of material categories")
+    material_type: list[str] = Field(
+        ..., description="List of material types (10-K, 10-Q, etc.)"
     )
 
 
@@ -72,23 +72,23 @@ async def preprocess_pdf_endpoint(req: PDFPreprocessRequest) -> list[dict[str, A
     all_parsed_data = []
 
     try:
-        for company_idx in range(len(req.pdf_file_company_ticker)):
+        for material_idx in range(len(req.pdf_file_material_category)):
             pdf_file_paths = list(
-                (BASE_PDF_PATH / Path(req.pdf_file_company_ticker[company_idx])).iterdir()
+                (BASE_PDF_PATH / Path(req.pdf_file_material_category[material_idx])).iterdir()
             )
             for pdf_file_path in pdf_file_paths:
                 all_parsed_data.append(
                     preprocess_pdf_file(
                         file_path=pdf_file_path,
-                        company_ticker=req.pdf_file_company_ticker[company_idx],
-                        report_type=req.report_type[company_idx],
+                        material_category=req.pdf_file_material_category[material_idx],
+                        material_type=req.material_type[material_idx],
                     )
                 )
         return all_parsed_data
     except FileNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e))
     except Exception as e:  # pragma: no cover - defensive logging
-        logger.exception("Failed to preprocess PDF at %s", req.pdf_file_company_ticker[company_idx])
+        logger.exception("Failed to preprocess PDF at %s", req.pdf_file_material_category[material_idx])
         raise HTTPException(status_code=500, detail="Failed to preprocess PDF") from e
 
 
