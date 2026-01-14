@@ -1,0 +1,97 @@
+[
+  {
+    "n8n_execution_id": "external-mock-001",
+    "status": "success",
+    "material_category": "MockCompany",
+    "query": "What are the safety requirements for aircraft structural repairs according to the maintenance manual?",
+    "report_groups": [1, 2, 3],
+    "execution_data": {
+      "output": "# Aircraft Structural Repair Safety Requirements\n\n## Executive Summary\n\nBased on the comprehensive analysis of the maintenance documentation, the following safety requirements must be strictly observed for aircraft structural repairs:\n\n## Key Safety Requirements\n\n### 1. Pre-Repair Inspection\n- **Damage Assessment**: All structural damage must be thoroughly inspected and documented before any repair work begins\n- **Material Verification**: Ensure all replacement materials meet the manufacturer's specifications and regulatory standards\n- **Tool Calibration**: All tools and equipment must be calibrated within the specified tolerance ranges\n\n### 2. Structural Integrity Standards\n- **Load-Bearing Capacity**: Repaired structures must maintain at least 95% of original load-bearing capacity\n- **Stress Distribution**: Repairs must not create stress concentration points that exceed design limits\n- **Material Compatibility**: Only approved materials that are compatible with existing structures may be used\n\n### 3. Repair Procedures\n- **Follow AMM Guidelines**: All repairs must strictly follow the Aircraft Maintenance Manual (AMM) procedures\n- **Quality Assurance**: Each step must be verified by a certified inspector\n- **Documentation**: Complete photographic and written documentation required for all repair stages\n\n### 4. Post-Repair Testing\n- **Non-Destructive Testing (NDT)**: Ultrasonic, radiographic, or eddy current testing as specified\n- **Functional Tests**: Load testing and operational verification must be performed\n- **Final Inspection**: Independent verification by quality control before return to service\n\n## Critical Safety Notes\n\n⚠️ **WARNING**: Any deviation from approved repair procedures requires engineering authorization and regulatory approval.\n\n⚠️ **CAUTION**: Repairs to primary structural components require special certification and may need additional approvals.\n\n## Compliance Requirements\n\n- **Regulatory Standards**: All repairs must comply with FAA/EASA regulations\n- **Manufacturer Authorization**: Certain repairs require OEM approval\n- **Record Keeping**: All repair records must be maintained for the aircraft's operational lifetime\n\n## Conclusion\n\nStructural repairs are critical safety items that require strict adherence to approved procedures, proper materials, and thorough inspection processes. No shortcuts or deviations are permitted without proper authorization.\n\n---\n*This report is generated based on analysis of official maintenance documentation and regulatory requirements.*",
+      "mid_steps": [
+        {
+          "action": {
+            "tool": "rag_retrieval_tool",
+            "toolInput": {
+              "query": "aircraft structural repair safety requirements",
+              "filter": {
+                "material_category": "MockCompany"
+              }
+            }
+          },
+          "observation": "[{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"AIRCRAFT STRUCTURAL REPAIR PROCEDURES\\\\n\\\\nChapter 51: Standard Practices - Structures\\\\n\\\\nSection 51-10: Structural Repair General\\\\n\\\\n1. SCOPE\\\\nThis section provides general information and standard practices for structural repairs. All repairs must maintain the structural integrity and airworthiness of the aircraft.\\\\n\\\\n2. SAFETY REQUIREMENTS\\\\n\\\\n2.1 Pre-Repair Inspection\\\\n- Conduct thorough damage assessment\\\\n- Document all findings with photographs and measurements\\\\n- Identify affected structural members and load paths\\\\n- Verify extent of damage using appropriate NDT methods\\\\n\\\\n2.2 Material Requirements\\\\n- Use only approved materials per specifications\\\\n- Verify material certifications and traceability\\\\n- Ensure material compatibility with existing structure\\\\n- Store materials per manufacturer requirements\\\\n\\\\n2.3 Tool and Equipment Requirements\\\\n- All measuring tools must be calibrated\\\\n- Torque wrenches must be within calibration period\\\\n- Rivet guns must be properly adjusted\\\\n- Safety equipment must be available and functional\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"MockCompany_AMM_Chapter51_Structures.pdf\\\",\\\"page_index\\\":15,\\\"chunk_index\\\":1,\\\"total_pages\\\":120,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"51-10\\\"}}\"},{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"3. STRUCTURAL INTEGRITY STANDARDS\\\\n\\\\n3.1 Load-Bearing Capacity\\\\nAll structural repairs must maintain the following criteria:\\\\n- Ultimate load capacity: 100% of original design\\\\n- Limit load capacity: 95% minimum after repair\\\\n- Safety factor: Maintain original design safety margins\\\\n- Fatigue life: Equal to or exceeding original design\\\\n\\\\n3.2 Stress Analysis Requirements\\\\n- Calculate stress concentration factors\\\\n- Verify stress distribution patterns\\\\n- Ensure no peak stresses exceed material allowables\\\\n- Consider thermal expansion effects\\\\n\\\\n3.3 Material Compatibility\\\\nApproved materials for structural repairs:\\\\n- Aluminum alloys: 2024-T3, 7075-T6 per AMS specifications\\\\n- Titanium alloys: Ti-6Al-4V per AMS 4911\\\\n- Composite materials: Pre-preg carbon fiber per manufacturer specs\\\\n- Fasteners: NAS, MS, or AN series as specified\\\\n\\\\n4. CORROSION PROTECTION\\\\n- Apply appropriate corrosion inhibiting compound\\\\n- Ensure proper surface preparation\\\\n- Use specified primer and paint systems\\\\n- Verify electrical bonding requirements\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"MockCompany_AMM_Chapter51_Structures.pdf\\\",\\\"page_index\\\":16,\\\"chunk_index\\\":2,\\\"total_pages\\\":120,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"51-10\\\"}}\"},{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"5. REPAIR PROCEDURES AND QUALITY ASSURANCE\\\\n\\\\n5.1 Standard Repair Process\\\\nAll structural repairs must follow this sequence:\\\\n\\\\nStep 1: Damage Assessment\\\\n- Clean area around damage\\\\n- Perform visual inspection\\\\n- Conduct NDT examination\\\\n- Document findings completely\\\\n\\\\nStep 2: Repair Planning\\\\n- Determine appropriate repair method\\\\n- Obtain necessary engineering approvals\\\\n- Gather required materials and tools\\\\n- Review applicable manuals and data\\\\n\\\\nStep 3: Repair Execution\\\\n- Follow AMM procedures exactly\\\\n- Document each step with photos\\\\n- Have inspector verify critical steps\\\\n- Maintain clean work environment\\\\n\\\\nStep 4: Quality Control\\\\n- Perform dimensional checks\\\\n- Conduct required NDT\\\\n- Verify all fastener torques\\\\n- Complete inspection documentation\\\\n\\\\n5.2 Inspector Requirements\\\\n- All structural repairs require inspection by certified personnel\\\\n- Critical repairs require dual inspection\\\\n- Independent quality assurance review for major repairs\\\\n- Sign-off required at each inspection hold point\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"MockCompany_AMM_Chapter51_Structures.pdf\\\",\\\"page_index\\\":17,\\\"chunk_index\\\":3,\\\"total_pages\\\":120,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"51-10\\\"}}\"},{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"6. POST-REPAIR TESTING AND VERIFICATION\\\\n\\\\n6.1 Non-Destructive Testing (NDT)\\\\nRequired NDT methods based on repair type:\\\\n\\\\nUltrasonic Testing (UT):\\\\n- Laminar defects in thick sections\\\\n- Bond quality verification\\\\n- Crack depth measurement\\\\n- Frequency: 5 MHz typical\\\\n\\\\nRadiographic Testing (RT):\\\\n- Internal defects in welds\\\\n- Fastener installation verification\\\\n- Porosity detection\\\\n- X-ray voltage: per material thickness\\\\n\\\\nEddy Current Testing (ET):\\\\n- Surface crack detection\\\\n- Heat treat verification\\\\n- Coating thickness measurement\\\\n- Conductivity testing\\\\n\\\\nDye Penetrant Testing (PT):\\\\n- Surface breaking defects\\\\n- Weld inspection\\\\n- Post-repair verification\\\\n- Must use approved penetrant system\\\\n\\\\n6.2 Functional Testing\\\\n- Operational checks of affected systems\\\\n- Load testing where applicable\\\\n- Movement and clearance verification\\\\n- Control system functionality verification\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"MockCompany_AMM_Chapter51_Structures.pdf\\\",\\\"page_index\\\":18,\\\"chunk_index\\\":4,\\\"total_pages\\\":120,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"51-10\\\"}}\"},{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"7. REGULATORY COMPLIANCE AND DOCUMENTATION\\\\n\\\\n7.1 Regulatory Standards\\\\nAll structural repairs must comply with:\\\\n- FAA Part 43 Appendix A - Major Repairs and Alterations\\\\n- EASA Part-M and Part-145 requirements\\\\n- Manufacturer's Structural Repair Manual (SRM)\\\\n- Type Certificate Data Sheet (TCDS) limitations\\\\n\\\\n7.2 Engineering Authorization Requirements\\\\nThe following repairs require engineering approval:\\\\n- Repairs not covered in SRM\\\\n- Modifications to repair procedures\\\\n- Alternative materials or methods\\\\n- Repairs to primary structure beyond SRM limits\\\\n\\\\n7.3 Documentation Requirements\\\\nComplete records must include:\\\\n- Work order or job card\\\\n- Detailed description of damage\\\\n- Photographs of damage and repair stages\\\\n- Material certifications and batch numbers\\\\n- NDT reports with technician certifications\\\\n- Inspector sign-offs and stamps\\\\n- Engineering approval documentation if applicable\\\\n- Return to service certification\\\\n\\\\n7.4 Record Retention\\\\n- All structural repair records: Permanent (life of aircraft)\\\\n- NDT reports: Permanent\\\\n- Material certifications: Permanent\\\\n- Photographs: Permanent\\\\n- Engineering approvals: Permanent\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"MockCompany_AMM_Chapter51_Structures.pdf\\\",\\\"page_index\\\":19,\\\"chunk_index\\\":5,\\\"total_pages\\\":120,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"51-10\\\"}}\"},{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"8. SPECIAL CONSIDERATIONS AND WARNINGS\\\\n\\\\n8.1 Critical Safety Warnings\\\\n\\\\nWARNING:\\\\nNEVER deviate from approved structural repair procedures without proper engineering authorization and regulatory approval. Unauthorized repairs can compromise aircraft structural integrity and lead to catastrophic failure.\\\\n\\\\nWARNING:\\\\nPrimary structural repairs require special certification. Only personnel with appropriate training and authorization may perform these repairs. Improper repairs to primary structure can result in loss of aircraft.\\\\n\\\\nCAUTION:\\\\nEnsure all corrosion is completely removed before beginning repair. Hidden corrosion can continue to propagate and weaken the structure even after repair.\\\\n\\\\nCAUTION:\\\\nDo not exceed specified heat limits during repair processes. Excessive heat can alter material properties and reduce structural strength.\\\\n\\\\n8.2 Environmental Considerations\\\\n- Temperature limits for adhesive curing: 60°F to 90°F\\\\n- Relative humidity for composite repairs: 30% to 60%\\\\n- Clean room requirements for critical repairs\\\\n- Contamination control procedures\\\\n\\\\n8.3 Special Tools and Equipment\\\\n- Specialized fixtures for alignment\\\\n- Precision measuring equipment\\\\n- Calibrated torque equipment\\\\n- Environmental monitoring systems\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"MockCompany_AMM_Chapter51_Structures.pdf\\\",\\\"page_index\\\":20,\\\"chunk_index\\\":6,\\\"total_pages\\\":120,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"51-10\\\"}}\"}]"
+        },
+        {
+          "action": {
+            "tool": "rag_retrieval_tool",
+            "toolInput": {
+              "query": "structural repair compliance regulatory requirements FAA EASA",
+              "filter": {
+                "material_category": "MockCompany"
+              }
+            }
+          },
+          "observation": "[{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"REGULATORY COMPLIANCE GUIDE\\\\n\\\\nChapter 5: Airworthiness Compliance\\\\n\\\\nSection 5-30: Structural Repair Approvals\\\\n\\\\n1. REGULATORY FRAMEWORK\\\\n\\\\n1.1 FAA Requirements\\\\nAll structural repairs must comply with:\\\\n- 14 CFR Part 43: Maintenance, Preventive Maintenance, Rebuilding, and Alteration\\\\n- Part 43 Appendix A: Major Repairs and Alterations\\\\n- Part 43 Appendix D: Scope and Detail of Items to be Included in Major Repair\\\\n- Advisory Circular AC 43.13-1B: Acceptable Methods, Techniques, and Practices\\\\n\\\\n1.2 EASA Requirements\\\\nFor EASA registered aircraft:\\\\n- Part-M: Continuing Airworthiness Requirements\\\\n- Part-145: Approved Maintenance Organizations\\\\n- Part-21 Subpart M: Repairs and Modifications\\\\n- AMC 20-29: Composite Aircraft Structure\\\\n\\\\n1.3 Manufacturer Requirements\\\\n- Aircraft Maintenance Manual (AMM) procedures\\\\n- Structural Repair Manual (SRM) limitations\\\\n- Service Bulletins and Service Letters\\\\n- Type Certificate Data Sheet restrictions\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"MockCompany_Regulatory_Compliance_Manual.pdf\\\",\\\"page_index\\\":87,\\\"chunk_index\\\":1,\\\"total_pages\\\":250,\\\"document_type\\\":\\\"Compliance Manual\\\",\\\"section\\\":\\\"5-30\\\"}}\"}]"
+        },
+        {
+          "action": {
+            "tool": "report_synthesis_tool",
+            "toolInput": {
+              "retrieved_documents": "[documents from previous steps]",
+              "query": "What are the safety requirements for aircraft structural repairs according to the maintenance manual?",
+              "report_format": "comprehensive_technical_report"
+            }
+          },
+          "observation": "Report synthesis completed successfully. Generated comprehensive technical report covering all safety requirements, compliance standards, and procedural guidelines for aircraft structural repairs."
+        }
+      ]
+    }
+  },
+  {
+    "n8n_execution_id": "external-mock-002",
+    "status": "success",
+    "material_category": "AeroTech",
+    "query": "What are the required inspection intervals for landing gear hydraulic systems?",
+    "report_groups": [2, 3],
+    "execution_data": {
+      "output": "# Landing Gear Hydraulic System Inspection Intervals\n\n## Summary\n\nThis report outlines the mandatory inspection intervals for landing gear hydraulic systems based on the Aircraft Maintenance Manual and regulatory requirements.\n\n## Inspection Schedule\n\n### Daily/Pre-Flight Inspections\n- Visual inspection for hydraulic fluid leaks\n- Brake accumulator pressure check\n- Landing gear position indicator verification\n- Emergency extension system check\n\n### Weekly Inspections (or every 50 flight hours)\n- Hydraulic fluid level check\n- Actuator seal condition inspection\n- Brake wear indicator check\n- Position sensor functionality test\n\n### Monthly Inspections (or every 200 flight hours)\n- Complete hydraulic system pressure test\n- Filter contamination check\n- Hydraulic line condition assessment\n- Accumulator pre-charge verification\n\n### Annual/1000 Flight Hour Inspections\n- Complete hydraulic system overhaul inspection\n- Actuator seal replacement assessment\n- Hydraulic pump performance test\n- System contamination analysis\n\n### 5-Year/Major Overhaul Intervals\n- Complete landing gear overhaul\n- All seals and O-rings replacement\n- Hydraulic component bench testing\n- Corrosion inspection and treatment\n\n## Critical Maintenance Points\n\n⚠️ Any hydraulic leak detection requires immediate investigation and resolution before next flight.\n\n## Compliance Note\n\nThese intervals represent minimum requirements. Operating conditions may necessitate more frequent inspections.\n\n---\n*Reference: AMM Chapter 32 - Landing Gear Systems*",
+      "mid_steps": [
+        {
+          "action": {
+            "tool": "rag_retrieval_tool",
+            "toolInput": {
+              "query": "landing gear hydraulic inspection intervals maintenance schedule",
+              "filter": {
+                "material_category": "AeroTech"
+              }
+            }
+          },
+          "observation": "[{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"CHAPTER 32 - LANDING GEAR\\\\n\\\\nSection 32-40: Hydraulic System Maintenance\\\\n\\\\nINSPECTION INTERVALS\\\\n\\\\nDaily/Pre-Flight:\\\\n- Hydraulic leak check\\\\n- Brake pressure verification\\\\n- Position indicators operational\\\\n\\\\nWeekly/50 FH:\\\\n- Fluid level check\\\\n- Seal inspection\\\\n- Brake wear check\\\\n\\\\nMonthly/200 FH:\\\\n- System pressure test\\\\n- Filter inspection\\\\n- Line condition check\\\\n\\\\nAnnual/1000 FH:\\\\n- System overhaul inspection\\\\n- Seal replacement evaluation\\\\n- Performance testing\\\\n\\\\n5-Year/Major:\\\\n- Complete overhaul\\\\n- Full seal replacement\\\\n- Component testing\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"AeroTech_AMM_Chapter32_LandingGear.pdf\\\",\\\"page_index\\\":42,\\\"chunk_index\\\":1,\\\"total_pages\\\":95,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"32-40\\\"}}\"}]"
+        }
+      ]
+    }
+  },
+  {
+    "n8n_execution_id": "external-mock-003",
+    "status": "error",
+    "material_category": "SkyWings",
+    "query": "What are the fire suppression system test procedures for the APU compartment?",
+    "report_groups": [1, 3],
+    "execution_data": {
+      "output": "# Error: Insufficient Documentation\n\n## Error Details\n\nUnable to generate complete report due to insufficient documentation coverage for APU fire suppression system test procedures.\n\n## Available Information\n\nPartial information was found regarding general fire suppression systems, but specific APU compartment test procedures were not available in the current documentation set.\n\n## Recommendation\n\nPlease consult:\n1. APU Maintenance Manual (specific to APU model)\n2. Fire Protection System Manual Chapter 26\n3. Contact engineering support for detailed procedures\n\n## Next Steps\n\n- Request additional documentation\n- Verify documentation coverage for APU systems\n- Consider expanding knowledge base\n\n---\n*Error Type: Incomplete Documentation Coverage*",
+      "mid_steps": [
+        {
+          "action": {
+            "tool": "rag_retrieval_tool",
+            "toolInput": {
+              "query": "APU fire suppression system test procedures",
+              "filter": {
+                "material_category": "SkyWings"
+              }
+            }
+          },
+          "observation": "[{\"type\":\"document\",\"text\":\"{\\\"pageContent\\\":\\\"CHAPTER 26 - FIRE PROTECTION\\\\n\\\\nGeneral fire suppression system overview provided. Specific APU procedures reference external manual.\\\",\\\"metadata\\\":{\\\"file_name\\\":\\\"SkyWings_AMM_Chapter26_FireProtection.pdf\\\",\\\"page_index\\\":12,\\\"chunk_index\\\":1,\\\"total_pages\\\":45,\\\"document_type\\\":\\\"AMM\\\",\\\"section\\\":\\\"26-10\\\"}}\"}]"
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,324 @@
+{
+    "nodes": [
+      {
+        "parameters": {
+          "fieldToSplitOut": "reports",
+          "options": {}
+        },
+        "id": "972d11b8-2efc-4586-9554-c2934a2c0f85",
+        "name": "Split Reports",
+        "type": "n8n-nodes-base.splitOut",
+        "typeVersion": 1,
+        "position": [
+          -16,
+          -16
+        ]
+      },
+      {
+        "parameters": {
+          "height": 280,
+          "width": 420,
+          "color": 4
+        },
+        "id": "3be4f0e7-0fb5-4779-a7a5-749f2905c0b9",
+        "name": "Sticky Note",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -928,
+          -128
+        ]
+      },
+      {
+        "parameters": {
+          "height": 280,
+          "width": 620,
+          "color": 5
+        },
+        "id": "eb7198a9-bec9-43d2-8032-98f4c695143c",
+        "name": "Sticky Note1",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          -128
+        ]
+      },
+      {
+        "parameters": {
+          "height": 280,
+          "width": 480,
+          "color": 6
+        },
+        "id": "838c86ac-2d5b-4bc0-8d5e-f4401e829c04",
+        "name": "Sticky Note2",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          160,
+          -128
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## 📥 Import External Reports\n\nThis workflow imports external agent reports from a JSON file into the n8n_report_model_logs database table.\n\n**File Location:**\n`/mnt/SSD2/CodeHub/FROAV_LLM/sample_external_reports.json`\n\n**Click 'Execute Workflow' to start the import process.**",
+          "height": 260,
+          "width": 400
+        },
+        "id": "1f790267-086b-45cd-b248-7c0dcd9c8e64",
+        "name": "Sticky Note4",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -928,
+          -320
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## 📄 Read & Parse JSON\n\nReads the JSON file from disk and converts it into a format that can be processed by n8n.\n\nEach report in the JSON array will be extracted and prepared for database insertion.",
+          "height": 260,
+          "width": 600
+        },
+        "id": "1fb8f283-2d90-4a66-8c0a-e8cf4f2ef878",
+        "name": "Sticky Note5",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          -480,
+          -320
+        ]
+      },
+      {
+        "parameters": {
+          "content": "## 💾 Database Insert\n\nInserts each report into the `n8n_report_model_logs` table with the following fields:\n- n8n_execution_id\n- status\n- material_category\n- query\n- report_groups\n- execution_data\n- logged_at (timestamp)\n\nUses ON CONFLICT to update existing records if execution_id already exists.",
+          "height": 260,
+          "width": 460
+        },
+        "id": "b0178392-c6bd-4bb1-a5e1-f6e094dea34f",
+        "name": "Sticky Note6",
+        "type": "n8n-nodes-base.stickyNote",
+        "typeVersion": 1,
+        "position": [
+          144,
+          -320
+        ]
+      },
+      {
+        "parameters": {
+          "formTitle": "data",
+          "formFields": {
+            "values": [
+              {
+                "fieldLabel": "data",
+                "fieldType": "file",
+                "multipleFiles": false,
+                "acceptFileTypes": ".json"
+              }
+            ]
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.formTrigger",
+        "typeVersion": 2.3,
+        "position": [
+          -896,
+          -16
+        ],
+        "id": "fcd759c6-9278-4ba9-8116-d2c00648d247",
+        "name": "On form submission",
+        "webhookId": "14121704-7e82-4e83-9b64-ed205c652dbf"
+      },
+      {
+        "parameters": {
+          "operation": "fromJson",
+          "destinationKey": "reports",
+          "options": {}
+        },
+        "type": "n8n-nodes-base.extractFromFile",
+        "typeVersion": 1,
+        "position": [
+          -432,
+          -16
+        ],
+        "id": "6799fe12-500b-406c-915a-691a1b08bd63",
+        "name": "Extract from File"
+      },
+      {
+        "parameters": {
+          "schema": {
+            "__rl": true,
+            "mode": "list",
+            "value": "public"
+          },
+          "table": {
+            "__rl": true,
+            "value": "n8n_report_model_logs",
+            "mode": "list",
+            "cachedResultName": "n8n_report_model_logs"
+          },
+          "columns": {
+            "mappingMode": "defineBelow",
+            "value": {
+              "n8n_execution_id": "={{ $json.n8n_execution_id }}",
+              "workflow_id": "=-1",
+              "status": "={{ $json.status }}",
+              "execution_data": "={{ $json.execution_data }}",
+              "logged_at": "={{ $now }}",
+              "query": "={{ $json.query }}",
+              "material_category": "={{ $json.material_category }}",
+              "report_groups": "={{ $json.report_groups }}"
+            },
+            "matchingColumns": [
+              "id"
+            ],
+            "schema": [
+              {
+                "id": "id",
+                "displayName": "id",
+                "required": false,
+                "defaultMatch": true,
+                "display": true,
+                "type": "number",
+                "canBeUsedToMatch": true,
+                "removed": true
+              },
+              {
+                "id": "n8n_execution_id",
+                "displayName": "n8n_execution_id",
+                "required": true,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "workflow_id",
+                "displayName": "workflow_id",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "status",
+                "displayName": "status",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "execution_data",
+                "displayName": "execution_data",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "object",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "logged_at",
+                "displayName": "logged_at",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "dateTime",
+                "canBeUsedToMatch": true
+              },
+              {
+                "id": "query",
+                "displayName": "query",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "material_category",
+                "displayName": "material_category",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              },
+              {
+                "id": "report_groups",
+                "displayName": "report_groups",
+                "required": false,
+                "defaultMatch": false,
+                "display": true,
+                "type": "string",
+                "canBeUsedToMatch": true,
+                "removed": false
+              }
+            ],
+            "attemptToConvertTypes": false,
+            "convertFieldsToString": false
+          },
+          "options": {}
+        },
+        "type": "n8n-nodes-base.postgres",
+        "typeVersion": 2.6,
+        "position": [
+          320,
+          -16
+        ],
+        "id": "1dea0d22-4ce8-4fce-8894-6fbd6d677066",
+        "name": "Insert rows in a table",
+        "alwaysOutputData": true,
+        "credentials": {
+          "postgres": {
+            "id": "rZUXkZalOqJb8lkv",
+            "name": "Postgres account"
+          }
+        }
+      }
+    ],
+    "connections": {
+      "Split Reports": {
+        "main": [
+          [
+            {
+              "node": "Insert rows in a table",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "On form submission": {
+        "main": [
+          [
+            {
+              "node": "Extract from File",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      },
+      "Extract from File": {
+        "main": [
+          [
+            {
+              "node": "Split Reports",
+              "type": "main",
+              "index": 0
+            }
+          ]
+        ]
+      }
+    },
+    "pinData": {},
+    "meta": {
+      "templateCredsSetupCompleted": true,
+      "instanceId": "e7be64f3f25a2b7a9ec15655e87c0e17055705d8fd0ef4699dd42ae8e031c0d0"
+    }
+  }
