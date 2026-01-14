@@ -1,0 +1,301 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "fieldToSplitOut": "feedbacks",
+        "options": {}
+      },
+      "id": "a72d33b8-4efc-4586-9554-c2934a2c0f86",
+      "name": "Split Feedbacks",
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        -16
+      ]
+    },
+    {
+      "parameters": {
+        "height": 280,
+        "width": 420,
+        "color": 4
+      },
+      "id": "4be4f1e7-1fb5-4779-a7a5-749f2905c0b9",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "height": 280,
+        "width": 620,
+        "color": 5
+      },
+      "id": "fb7198a9-cec9-43d2-8032-98f4c695143c",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "height": 280,
+        "width": 480,
+        "color": 6
+      },
+      "id": "938c86ac-3d5b-4bc0-8d5e-f4401e829c04",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        160,
+        -128
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 📥 Import External User Feedback\n\nThis workflow imports external user feedback from a JSON file into the report_human_feedback database table.\n\n**File Location:**\n`/mnt/SSD2/CodeHub/FROAV_LLM/sample_external_user_feedback.json`\n\n**Click 'Execute Workflow' to start the import process.**",
+        "height": 260,
+        "width": 400
+      },
+      "id": "2f790267-186b-45cd-b248-7c0dcd9c8e64",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -928,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 📄 Read & Parse JSON\n\nReads the JSON file from disk and converts it into a format that can be processed by n8n.\n\nEach feedback entry in the JSON array will be extracted and prepared for database insertion.",
+        "height": 260,
+        "width": 600
+      },
+      "id": "2fb8f283-3d90-4a66-8c0a-e8cf4f2ef878",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "content": "## 💾 Database Insert\n\nInserts each feedback entry into the `report_human_feedback` table with the following fields:\n- user_name\n- report_n8n_execution_id\n- human_feedback_data (jsonb)\n- query\n- material_category\n- logged_at (timestamp)\n\nUses ON CONFLICT to update existing records if the same user provides feedback for the same execution_id again.",
+        "height": 260,
+        "width": 460
+      },
+      "id": "c0178392-d6bd-4bb1-a5e1-f6e094dea34f",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        144,
+        -320
+      ]
+    },
+    {
+      "parameters": {
+        "formTitle": "data",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "data",
+              "fieldType": "file",
+              "multipleFiles": false,
+              "acceptFileTypes": ".json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.3,
+      "position": [
+        -896,
+        -16
+      ],
+      "id": "gcd759c6-0278-4ba9-8116-d2c00648d247",
+      "name": "On form submission",
+      "webhookId": "24121704-8e82-4e83-9b64-ed205c652dbf"
+    },
+    {
+      "parameters": {
+        "operation": "fromJson",
+        "destinationKey": "feedbacks",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        -16
+      ],
+      "id": "7799fe12-600b-406c-915a-691a1b08bd63",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "report_human_feedback",
+          "mode": "list",
+          "cachedResultName": "report_human_feedback"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "user_name": "={{ $json.user_name }}",
+            "report_n8n_execution_id": "={{ $json.report_n8n_execution_id }}",
+            "human_feedback_data": "={{ $json.human_feedback_data }}",
+            "query": "={{ $json.query }}",
+            "material_category": "={{ $json.material_category }}",
+            "logged_at": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "user_name",
+              "displayName": "user_name",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "report_n8n_execution_id",
+              "displayName": "report_n8n_execution_id",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "human_feedback_data",
+              "displayName": "human_feedback_data",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "object",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "query",
+              "displayName": "query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "material_category",
+              "displayName": "material_category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "logged_at",
+              "displayName": "logged_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        320,
+        -16
+      ],
+      "id": "2dea0d22-5ce8-4fce-8894-6fbd6d677066",
+      "name": "Insert rows in a table",
+      "alwaysOutputData": true,
+      "credentials": {
+        "postgres": {
+          "id": "rZUXkZalOqJb8lkv",
+          "name": "Postgres account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Split Feedbacks": {
+      "main": [
+        [
+          {
+            "node": "Insert rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Split Feedbacks",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e7be64f3f25a2b7a9ec15655e87c0e17055705d8fd0ef4699dd42ae8e031c0d0"
+  }
+}

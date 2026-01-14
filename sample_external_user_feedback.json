@@ -1,0 +1,72 @@
+[
+  {
+    "user_name": "john.doe@example.com",
+    "report_n8n_execution_id": "ext_12345",
+    "human_feedback_data": {
+      "relevance_score": 85,
+      "completeness_score": 78,
+      "reliability_score": 90,
+      "understandability_score": 82,
+      "comments": "The report provided comprehensive information about the aircraft maintenance requirements. The reference sources from RAF documents were particularly helpful. Could benefit from more visual diagrams in the technical sections.",
+      "report_row_id": 1
+    },
+    "query": "What are the maintenance requirements for the landing gear system?",
+    "material_category": "RAF"
+  },
+  {
+    "user_name": "sarah.smith@example.com",
+    "report_n8n_execution_id": "ext_12346",
+    "human_feedback_data": {
+      "relevance_score": 92,
+      "completeness_score": 88,
+      "reliability_score": 95,
+      "understandability_score": 91,
+      "comments": "Excellent report! Very thorough analysis of the flight control systems. The breakdown by component was clear and easy to follow. All my questions were answered comprehensively.",
+      "report_row_id": 2
+    },
+    "query": "Explain the flight control system architecture and redundancy measures",
+    "material_category": "RAF"
+  },
+  {
+    "user_name": "mike.jones@example.com",
+    "report_n8n_execution_id": "ext_12347",
+    "human_feedback_data": {
+      "relevance_score": 65,
+      "completeness_score": 60,
+      "reliability_score": 70,
+      "understandability_score": 68,
+      "comments": "The report covered the basics but lacked depth in certain areas. Would have appreciated more specific examples and case studies. Some technical terms were not explained clearly for non-experts.",
+      "report_row_id": 3
+    },
+    "query": "What are the environmental constraints for operating the aircraft in extreme weather?",
+    "material_category": "RAF"
+  },
+  {
+    "user_name": "emma.wilson@example.com",
+    "report_n8n_execution_id": "ext_12348",
+    "human_feedback_data": {
+      "relevance_score": 88,
+      "completeness_score": 85,
+      "reliability_score": 92,
+      "understandability_score": 87,
+      "comments": "Very well-structured report with good citations. The summary at the beginning was helpful. I particularly appreciated the step-by-step procedures outlined in the document. Minor improvement needed in formatting consistency.",
+      "report_row_id": 4
+    },
+    "query": "What are the pre-flight inspection procedures for the avionics systems?",
+    "material_category": "RAF"
+  },
+  {
+    "user_name": "david.brown@example.com",
+    "report_n8n_execution_id": "ext_12349",
+    "human_feedback_data": {
+      "relevance_score": 45,
+      "completeness_score": 50,
+      "reliability_score": 55,
+      "understandability_score": 48,
+      "comments": "The report did not fully address my query. Important aspects of the fuel system troubleshooting were missing. The information provided seemed to be from outdated documentation. Needs significant improvement in relevance and completeness.",
+      "report_row_id": 5
+    },
+    "query": "How do I troubleshoot fuel system anomalies during in-flight operations?",
+    "material_category": "RAF"
+  }
+]
