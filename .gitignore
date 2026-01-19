@@ -6,6 +6,7 @@ FROAV_LLM.egg-info/
 **/__pycache__/
 build/
 static/
+data/
 
 # Environment variables
 .env
